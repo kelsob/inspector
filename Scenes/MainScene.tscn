@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://7p2ulqv7apd7"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_ia23j"]
+[ext_resource type="Script" path="res://Scripts/MainScene.gd" id="2_573kr"]
+[ext_resource type="PackedScene" uid="uid://vcafh6usbmd5" path="res://Scenes/room.tscn" id="6_erd50"]
+[ext_resource type="PackedScene" uid="uid://beuw0p2hjaxxg" path="res://Assets/BlenderFiles/window.tscn" id="7_2hgir"]
+[ext_resource type="PackedScene" uid="uid://b2fm3syiquut2" path="res://Scenes/conveyor_belt.tscn" id="7_5nhw5"]
+[ext_resource type="PackedScene" uid="uid://cduj7wo75p3b0" path="res://Scenes/control_panel.tscn" id="7_fyrb3"]
+[ext_resource type="Script" path="res://Scripts/InspectionObject.gd" id="12_tkjm4"]
+[ext_resource type="PackedScene" uid="uid://dyrhno1ty1x1b" path="res://Scenes/player.tscn" id="12_vcgej"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_giumy"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_f8xta"]
+sky_material = SubResource("ProceduralSkyMaterial_giumy")
+
+[sub_resource type="Environment" id="Environment_msqrk"]
+background_mode = 2
+sky = SubResource("Sky_f8xta")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ia23j")
+
+[node name="MainScene" type="Node3D" parent="."]
+script = ExtResource("2_573kr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MainScene"]
+environment = SubResource("Environment_msqrk")
+
+[node name="Lights" type="Node3D" parent="MainScene"]
+
+[node name="ExaminationRoomLight" type="OmniLight3D" parent="MainScene/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32982, -1.99301)
+
+[node name="ExaminorRoomLight" type="OmniLight3D" parent="MainScene/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32982, 1.53241)
+
+[node name="Window" parent="MainScene" instance=ExtResource("7_2hgir")]
+
+[node name="ControlPanel" parent="MainScene" instance=ExtResource("7_fyrb3")]
+
+[node name="InspectionObject" type="Node3D" parent="MainScene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0.6, -2)
+script = ExtResource("12_tkjm4")
+
+[node name="Room" parent="MainScene" instance=ExtResource("6_erd50")]
+
+[node name="ConveyorBelt" parent="MainScene" instance=ExtResource("7_5nhw5")]
+
+[node name="Player" parent="." instance=ExtResource("12_vcgej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.88519)
+
+[node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Button" type="ColorRect" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 1, 1)

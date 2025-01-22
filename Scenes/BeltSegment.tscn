@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://cv64m8m4ivhfb"]
+
+[ext_resource type="Texture2D" uid="uid://36gpopau2qpg" path="res://Assets/BlenderFiles/beltsegment_belt.jpg" id="1_kkt5a"]
+[ext_resource type="Script" path="res://Scripts/belt_segment.gd" id="1_ql51c"]
+[ext_resource type="Texture2D" uid="uid://dktta4wtnehgk" path="res://Assets/BlenderFiles/beltsegment_belt-roughness.jpg" id="2_87g5p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_datm3"]
+resource_name = "BeltMaterial"
+cull_mode = 2
+albedo_texture = ExtResource("1_kkt5a")
+metallic_texture_channel = 2
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_87g5p")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_16wie"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -0.891, 2, 1e-05, 1.782),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"name": "BeltMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_62tcp"]
+resource_name = "beltsegment_Plane_003"
+_surfaces = [{
+"aabb": AABB(-1, 0, -0.891, 2, 1e-05, 1.782),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 0, 0),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"material": SubResource("StandardMaterial3D_datm3"),
+"name": "BeltMaterial",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(255, 255, 0, 0, 254, 255, 84, 213, 255, 255, 0, 0, 0, 0, 84, 213, 0, 0, 0, 0, 255, 255, 84, 213, 0, 0, 0, 0, 0, 0, 84, 213, 84, 213, 170, 42, 84, 213, 170, 42, 84, 213, 170, 42, 84, 213, 170, 42)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_16wie")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_m57gj"]
+data = PackedVector3Array(1, 0, 0.891, -1, 0, -0.891, 1, 0, -0.891, 1, 0, 0.891, -1, 0, 0.891, -1, 0, -0.891)
+
+[node name="BeltSegment" type="StaticBody3D"]
+script = ExtResource("1_ql51c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_62tcp")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_m57gj")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("ConcavePolygonShape3D_m57gj")

@@ -1,0 +1,32 @@
+[gd_scene load_steps=9 format=3 uid="uid://2kacrxtt8pn7"]
+
+[ext_resource type="Script" path="res://Scripts/MainScene.gd" id="1_lgikk"]
+[ext_resource type="PackedScene" uid="uid://vcafh6usbmd5" path="res://Scenes/room.tscn" id="2_3m53q"]
+[ext_resource type="Script" path="res://Scripts/ConveyorBelt.gd" id="3_bjrg4"]
+[ext_resource type="PackedScene" uid="uid://dmw6ts2in7n0i" path="res://Assets/BlenderFiles/bracingbar.glb" id="4_hvhc1"]
+[ext_resource type="Script" path="res://Scenes/Rollers.gd" id="5_if07m"]
+[ext_resource type="PackedScene" uid="uid://cu8sqwpx74acl" path="res://Assets/BlenderFiles/beltsegment.glb" id="6_4pt6q"]
+[ext_resource type="PackedScene" uid="uid://beuw0p2hjaxxg" path="res://Assets/BlenderFiles/window.tscn" id="6_hjd6y"]
+[ext_resource type="PackedScene" uid="uid://cduj7wo75p3b0" path="res://Scenes/control_panel.tscn" id="7_82c28"]
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_lgikk")
+
+[node name="Room" parent="." instance=ExtResource("2_3m53q")]
+
+[node name="ConveyorBelt" type="Node3D" parent="."]
+script = ExtResource("3_bjrg4")
+
+[node name="bracingbar" parent="ConveyorBelt" instance=ExtResource("4_hvhc1")]
+
+[node name="Rollers" type="Node3D" parent="ConveyorBelt"]
+script = ExtResource("5_if07m")
+roller_acceleration = 2.0
+
+[node name="BeltSegments" type="Node3D" parent="ConveyorBelt"]
+
+[node name="beltsegment" parent="ConveyorBelt/BeltSegments" instance=ExtResource("6_4pt6q")]
+
+[node name="Window" parent="." instance=ExtResource("6_hjd6y")]
+
+[node name="ControlPanel" parent="." instance=ExtResource("7_82c28")]

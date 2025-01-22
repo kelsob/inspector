@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2fm3syiquut2"]
+
+[ext_resource type="Script" path="res://Scripts/ConveyorBelt.gd" id="1_uxt7m"]
+[ext_resource type="Script" path="res://Scenes/Rollers.gd" id="2_rnofu"]
+[ext_resource type="Script" path="res://Scripts/BeltSegments.gd" id="3_mrrev"]
+[ext_resource type="PackedScene" uid="uid://drwrxt650kj2s" path="res://Assets/BlenderFiles/conveyorstand.glb" id="5_jhu5m"]
+[ext_resource type="PackedScene" uid="uid://dmw6ts2in7n0i" path="res://Assets/BlenderFiles/bracingbar.glb" id="5_wnl8k"]
+
+[node name="ConveyorBelt" type="Node3D"]
+script = ExtResource("1_uxt7m")
+
+[node name="Rollers" type="Node3D" parent="."]
+script = ExtResource("2_rnofu")
+
+[node name="BeltSegments" type="Node3D" parent="."]
+script = ExtResource("3_mrrev")
+
+[node name="conveyorstand" parent="." instance=ExtResource("5_jhu5m")]
+
+[node name="bracingbar" parent="." instance=ExtResource("5_wnl8k")]

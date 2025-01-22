@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyrhno1ty1x1b"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_urie2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8omsq"]
+height = 3.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ct7ab"]
+points = PackedVector3Array(0.182602, 1.46167, 0.0455521, -0.485734, -1.10355, -0.044028, -0.485729, -1.10354, 0.0440275, 0.485734, -1.10355, 0.044028, -0.044028, 1.10355, -0.485734, -0.21899, 1.09495, 0.438074, 0.044028, -1.10355, -0.485734, 0.130336, -1.0433, 0.478275, 0.485729, 1.10354, 0.0440275, -0.438074, 1.09495, -0.21899, 0.388846, 1.07982, -0.302312, 0.302312, 1.07982, 0.388846, -0.178777, -1.29686, 0.35765, -0.302313, -1.07982, -0.388848, -0.0455521, -1.46167, -0.182602, -0.438072, 1.09494, 0.218989, 0.388848, -1.07982, -0.302313, -0.302312, -1.07982, 0.388846, 0.388846, -1.07982, 0.302312, -0.182602, 1.46167, -0.0455521, 0.272271, -1.40695, 0.0906265, 0.21899, 1.09495, -0.438074, -0.0440275, 1.10354, 0.485729, -0.302312, 1.07982, -0.388846, -0.130336, -1.0433, 0.478275, 0.469358, 0.938333, -0.170542, -0.0906251, 1.40692, 0.272266, -0.485734, 1.10355, 0.044028, 0.0906251, 1.40692, -0.272266, 0.469358, 0.938333, 0.170542, -0.170542, -0.938333, -0.469358, -0.428268, -0.984857, -0.256887)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kcy72"]
+radius = 1.6
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_urie2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8omsq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ct7ab")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="InteractionArea3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.031, 0)
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea3D"]
+shape = SubResource("SphereShape3D_kcy72")
