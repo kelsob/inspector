@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://7p2ulqv7apd7"]
+[gd_scene load_steps=14 format=3 uid="uid://7p2ulqv7apd7"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_ia23j"]
 [ext_resource type="Script" path="res://Scripts/MainScene.gd" id="2_573kr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://beuw0p2hjaxxg" path="res://Assets/BlenderFiles/window.tscn" id="7_2hgir"]
 [ext_resource type="PackedScene" uid="uid://b2fm3syiquut2" path="res://Scenes/conveyor_belt.tscn" id="7_5nhw5"]
 [ext_resource type="PackedScene" uid="uid://cduj7wo75p3b0" path="res://Scenes/control_panel.tscn" id="7_fyrb3"]
+[ext_resource type="Script" path="res://Scripts/inspection_room_camera.gd" id="9_xm25n"]
 [ext_resource type="Script" path="res://Scripts/InspectionObject.gd" id="12_tkjm4"]
 [ext_resource type="PackedScene" uid="uid://dyrhno1ty1x1b" path="res://Scenes/player.tscn" id="12_vcgej"]
 
@@ -22,6 +23,9 @@ sky = SubResource("Sky_f8xta")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_3n0ti"]
+viewport_path = NodePath("MainScene/SubViewport")
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ia23j")
 
@@ -35,6 +39,7 @@ environment = SubResource("Environment_msqrk")
 
 [node name="ExaminationRoomLight" type="OmniLight3D" parent="MainScene/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32982, -1.99301)
+visible = false
 
 [node name="ExaminorRoomLight" type="OmniLight3D" parent="MainScene/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32982, 1.53241)
@@ -44,15 +49,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32982, 1.53241)
 [node name="ControlPanel" parent="MainScene" instance=ExtResource("7_fyrb3")]
 
 [node name="InspectionObject" type="Node3D" parent="MainScene"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0.6, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.6, -2)
 script = ExtResource("12_tkjm4")
 
 [node name="Room" parent="MainScene" instance=ExtResource("6_erd50")]
 
 [node name="ConveyorBelt" parent="MainScene" instance=ExtResource("7_5nhw5")]
 
-[node name="Player" parent="." instance=ExtResource("12_vcgej")]
+[node name="Monitor" type="Node3D" parent="MainScene"]
+transform = Transform3D(0.5, 0, 0, 0, 0.495476, 0.0671055, 0, -0.0671055, 0.495476, -0.855252, 0.524019, 0.248069)
+
+[node name="MonitorTexture" type="Sprite3D" parent="MainScene/Monitor"]
+sorting_offset = 1.0
+texture = SubResource("ViewportTexture_3n0ti")
+
+[node name="Player" parent="MainScene" instance=ExtResource("12_vcgej")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.88519)
+
+[node name="SubViewport" type="SubViewport" parent="MainScene"]
+size = Vector2i(192, 108)
+
+[node name="InspectionRoomCamera" type="Node3D" parent="MainScene/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46455, -0.613386)
+script = ExtResource("9_xm25n")
+
+[node name="Camera3D" type="Camera3D" parent="MainScene/SubViewport/InspectionRoomCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.639157, 0.769076, 0, -0.769076, 0.639157, 0, 0, 0)
 
 [node name="UI" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

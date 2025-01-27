@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b262vq3ekrlhn"]
+
+[resource]
+resource_name = "Light-GreenGlassMaterial"
+transparency = 1
+albedo_color = Color(0, 0.439216, 0, 1)
+albedo_texture_force_srgb = true
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+subsurf_scatter_transmittance_enabled = true
+subsurf_scatter_transmittance_color = Color(1, 0, 0, 1)
+subsurf_scatter_transmittance_depth = 0.2
+subsurf_scatter_transmittance_boost = 1.0

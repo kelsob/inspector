@@ -27,6 +27,8 @@ enum State {
 
 var current_state: State = State.OFF
 
+signal location_arrived()
+
 func _ready():
 	establish_starting_position()
 	create_belt_segments()
@@ -65,7 +67,7 @@ func _process(delta):
 				move_belt()
 				delta_accelerating += delta
 				if current_speed == 0.0:
-					location_arrived()
+					belt_location_arrived()
 
 		State.ON:
 			if current_speed < max_speed:
@@ -104,8 +106,9 @@ func move_belt():
 		if object is RigidBody3D:
 			object.position.x += displacement_actual
 
-func location_arrived():
+func belt_location_arrived():
 	belt_displacement = 0.0
+	location_arrived.emit()
 
 func recalculate_delta_turn_off():
 	delta_turn_off = (desired_displacement - (2 * acceleration_displacement)) / (max_speed * 60)
