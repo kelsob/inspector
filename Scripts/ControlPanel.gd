@@ -2,8 +2,8 @@ extends Node3D
 
 @onready var button_left = $controlpanel/ControlPanel/ButtonLeft/Cube3
 @onready var button_right = $controlpanel/ControlPanel/ButtonRight/Cube2
-@onready var joystick_interactable = $joystick/Joystick/Cube7
-@onready var joystick = $joystick
+@onready var joystick_interactable = $Joystick/joystick/Joystick/Cube7
+@onready var joystick = $Joystick
 @onready var anim = $controlpanel/AnimationPlayer
 
 # Path to the script you want to attach to the buttons

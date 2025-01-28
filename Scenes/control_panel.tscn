@@ -556,6 +556,8 @@ libraries = {
 "": SubResource("AnimationLibrary_q24pu")
 }
 
-[node name="joystick" parent="." instance=ExtResource("6_85ri7")]
-transform = Transform3D(1, 0, 0, 0, 0.906308, -0.422618, 0, 0.422618, 0.906308, -0.619506, 0.137229, 0.455597)
+[node name="Joystick" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.906308, -0.422618, 0, 0.422618, 0.906308, -0.62, 0.137, 0.456)
 script = ExtResource("7_xj4lx")
+
+[node name="joystick" parent="Joystick" instance=ExtResource("6_85ri7")]
