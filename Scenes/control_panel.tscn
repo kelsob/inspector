@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://cduj7wo75p3b0"]
+[gd_scene load_steps=36 format=4 uid="uid://cduj7wo75p3b0"]
 
 [ext_resource type="Script" path="res://Scripts/ControlPanel.gd" id="1_bm8k1"]
 [ext_resource type="Texture2D" uid="uid://cwe3kaf72mwti" path="res://Assets/BlenderFiles/controlpanel_Base Metal Texture 01 by SimoonMurray on DeviantArt_3.png" id="2_ipi40"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cy5qbgfw8ylu6" path="res://Assets/BlenderFiles/controlpanel_free-soft-plastic-texture-501_2.png" id="5_akbng"]
 [ext_resource type="PackedScene" uid="uid://b4v3yygpofl52" path="res://Assets/BlenderFiles/joystick.tscn" id="6_85ri7"]
 [ext_resource type="Script" path="res://Scripts/joystick.gd" id="7_xj4lx"]
+[ext_resource type="PackedScene" uid="uid://c1h3gtymwnd4c" path="res://Scenes/buttonrectangular.tscn" id="8_36x7b"]
+[ext_resource type="Script" path="res://Scripts/buttonrectangular.gd" id="9_mkiv8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehnxf"]
 resource_name = "ControlPanelMaterial"
@@ -561,3 +563,11 @@ transform = Transform3D(1, 0, 0, 0, 0.906308, -0.422618, 0, 0.422618, 0.906308, 
 script = ExtResource("7_xj4lx")
 
 [node name="joystick" parent="Joystick" instance=ExtResource("6_85ri7")]
+
+[node name="buttonrectangular" parent="." instance=ExtResource("8_36x7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.685858, 0.10293, 0.581627)
+script = ExtResource("9_mkiv8")
+
+[node name="buttonrectangular2" parent="." instance=ExtResource("8_36x7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.554032, 0.10293, 0.581627)
+script = ExtResource("9_mkiv8")
